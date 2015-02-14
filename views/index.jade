@@ -1,0 +1,18 @@
+extends layout
+
+block content
+	div.container-fluid
+		div.col-xs-12
+			div.jumbotron
+				h1 Bienvenido!
+				if numero
+					p Tu N&uacute;mero de tarjeta es #{numero} y tu saldo es #{saldo}
+					p
+						a.btn.btn-primary.btn.lg(href="http://localhost:5365/?tn="+numero) Arrastra el bot&oacute;n a tus Marcadores!
+				else
+					p Tu Saldo TUC en segundos!
+					form(action='/', method='POST').form-horizontal
+						.form-group
+							label(for='txtTUCNumber').control-label.col-sm-2 N&uacute;mero de Tarjeta
+							.col-sm-4
+								input(type="text", name='txtTUCNumber', id='txtTUCNumber', placeholder='Aquí tu numero de Tarjeta TUC').form-control
