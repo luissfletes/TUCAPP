@@ -13,6 +13,7 @@ var tuc = new Tuc();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+	var hostnm = req.hostname;
 	var querystring = req.query;
 	console.log(querystring)
 	if (querystring.tn){
@@ -20,6 +21,7 @@ router.get('/', function(req, res, next) {
 		tuc.getBalance(querystring.tn, function( balance ){
 	    	res.render('index', {
 	    		hasnumber: false,
+	    		host: hostnm,
 	    		numero: querystring.tn,
 	    		saldo: balance
 	    	});

@@ -8,7 +8,7 @@ block content
 				if numero
 					p Tu N&uacute;mero de tarjeta es #{numero} y tu saldo es #{saldo}
 					p
-						a.btn.btn-primary.btn.lg(href="http://localhost:5365/?tn="+numero) Arrastra el bot&oacute;n a tus Marcadores!
+						a.btn.btn-primary.btn.lg(href="http://"+host+"/?tn="+numero) Arrastra el bot&oacute;n a tus Marcadores!
 				else
 					p Tu Saldo TUC en segundos!
 					form(action='/', method='POST').form-horizontal
