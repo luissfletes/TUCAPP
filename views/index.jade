@@ -3,16 +3,27 @@ extends layout
 block content
 	div.container-fluid
 		div.col-xs-12
-			div.jumbotron
-				h1 Bienvenido!
-				if numero
-					p Tu N&uacute;mero de tarjeta es #{numero} y tu saldo es #{saldo}
+			div.jumbotron.bx-shadow
+				if error
+					h1 Error :(
+					p.text-danger El N&uacute;mero de tarjeta TUC no es V&aacute;lido
 					p
-						a.btn.btn-primary.btn.lg(href="http://"+host+"/?tn="+numero) Arrastra el bot&oacute;n a tus Marcadores!
+						a.btn.btn-default.btn-lg(href="/") ¿Intentar de Nuevo?
 				else
-					p Tu Saldo TUC en segundos!
-					form(action='/', method='POST').form-horizontal
-						.form-group
-							label(for='txtTUCNumber').control-label.col-sm-2 N&uacute;mero de Tarjeta
-							.col-sm-4
-								input(type="text", name='txtTUCNumber', id='txtTUCNumber', placeholder='Aquí tu numero de Tarjeta TUC').form-control
+					h1 Bienvenido!
+					if numero
+						p Tu N&uacute;mero de tarjeta es #{numero} y tu saldo es #{saldo}
+						if !fromBK
+							p
+								a.btn.btn-primary.btn-lg(href="http://"+host+"/?tn="+numero+"&bk=1") Consultar TUC: #{numero}
+							p Arrastra el Bot&oacute;n de arriba a tus Marcadores para consultar mas r&aacute;pido!
+							p
+								a.btn.btn-default.btn-lg(href="/") <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Consultar de Nuevo
+					else
+						p Tu Saldo TUC en segundos!
+						form(action='/', method='POST').form-horizontal
+							.form-group
+								label(for='txtTUCNumber').control-label.col-sm-2 N&uacute;mero de Tarjeta
+								.col-sm-4
+									input(type="text", name='txtTUCNumber', required='required', id='txtTUCNumber', placeholder='Aquí tu numero de Tarjeta TUC').form-control
+									span(id="digitFeed", class="help-block text-warning", style='display: none;') Solo digita N&uacute;meros por favor :D

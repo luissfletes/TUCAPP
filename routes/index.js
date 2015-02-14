@@ -15,19 +15,26 @@ var tuc = new Tuc();
 router.get('/', function(req, res, next) {
 	var hostnm = req.hostname;
 	var querystring = req.query;
-	console.log(querystring)
 	if (querystring.tn){
-		console.log('tngo')
 		tuc.getBalance(querystring.tn, function( balance ){
-	    	res.render('index', {
-	    		hasnumber: false,
-	    		host: hostnm,
-	    		numero: querystring.tn,
-	    		saldo: balance
-	    	});
+			if (balance.error)
+				res.render('index',{
+					error: true
+				});
+			else{
+				var dat = {
+		    		hasnumber: false,
+		    		host: hostnm,
+		    		numero: querystring.tn,
+		    		saldo: balance
+		    	};
+		    	if (querystring.bk){ //bookmarlet request
+		    		dat.fromBK = true;
+		    	}
+		    	res.render('index', dat);
+			}
 		});
 	}else{
-		console.log('no tngo')
 		res.render('index', { 
     		hasnumber: false
     	});
